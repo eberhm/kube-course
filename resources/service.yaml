@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: secondapp
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    nodePort: 32000
+  type: NodePort 
+  selector:
+    example: second
+
