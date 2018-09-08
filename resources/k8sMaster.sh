@@ -36,7 +36,7 @@ echo "Installed - now to get Calico Project network plugin"
 
 sleep 3
 
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address=172.42.42.10
 
 sleep 5
 

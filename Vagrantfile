@@ -6,15 +6,23 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
+
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--cpus", 2]
+  end
+
   config.vm.define "master" do |master|
-    master.vm.box = "aspyatkin/ubuntu-16.04-server-amd64"
-    master.vm.network "private_network", ip: "192.168.33.10"
+    master.vm.box = "ubuntu/xenial64"
+    master.vm.network "private_network", ip: "172.42.42.10", netmask: "255.255.255.0"
+    master.vm.hostname = "master"
     master.vm.synced_folder "resources/", "/resources"
   end
 
   config.vm.define "minion" do |minion|
-    minion.vm.box = "aspyatkin/ubuntu-16.04-server-amd64"
-    minion.vm.network "private_network", ip: "192.168.33.20"
+    minion.vm.box = "ubuntu/xenial64"
+    minion.vm.network "private_network", ip: "172.42.42.11", netmask: "255.255.255.0"
+    minion.vm.hostname = "minion1"
     minion.vm.synced_folder "resources/", "/resources"
   end
 end
